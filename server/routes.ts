@@ -11,7 +11,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     if (!req.isAuthenticated()) {
       return res.status(401).json({ message: "Authentication required" });
     }
-    
+
     // Sample dashboard data - in a real app you'd fetch this from a database
     const dashboardData = {
       stats: {
@@ -47,8 +47,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       ]
     };
-    
+
     res.json(dashboardData);
+  });
+
+  // Database check endpoint
+  app.get("/api/db-check", async (req, res) => {
+    try {
+      const result = await db.execute(sql`SELECT current_database(), current_user, version(), inet_server_addr() as host;`);
+      res.json({ connected: true, info: result.rows[0] });
+    } catch (error) {
+      res.status(500).json({ connected: false, error: error.message });
+    }
   });
 
   const httpServer = createServer(app);
