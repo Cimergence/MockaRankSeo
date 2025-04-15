@@ -174,3 +174,17 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ---
 
 © 2025 MockaRank. All rights reserved.
+
+
+# Tips
+## Tips for Running and Testing the Project Locally
+
+### 1. View Folder Structure
+To view the folder structure of the project, you can use the `tree` command:
+```bash
+tree -L 2
+```
+or
+```bash
+tree -L 2 > folder-structure.txt
+```

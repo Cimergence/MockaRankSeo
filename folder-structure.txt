@@ -1,0 +1,31 @@
+.
+├── README.md
+├── attached_assets
+│   └── DesignMockup.png
+├── client
+│   ├── index.html
+│   └── src
+├── dist
+│   ├── index.js
+│   └── public
+├── drizzle.config.ts
+├── folder-structure.txt
+├── generated-icon.png
+├── node_module
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── server
+│   ├── auth.ts
+│   ├── db.ts
+│   ├── index.ts
+│   ├── routes.ts
+│   ├── storage.ts
+│   └── vite.ts
+├── shared
+│   └── schema.ts
+├── tailwind.config.ts
+├── theme.json
+├── tsconfig.json
+├── vercel.json
+└── vite.config.ts
