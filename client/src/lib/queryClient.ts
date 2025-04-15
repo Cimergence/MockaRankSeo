@@ -1,5 +1,13 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
+const API_URL = import.meta.env.DEV 
+  ? "http://localhost:5000"
+  : import.meta.env.VITE_API_URL as string;
+
+if (!API_URL) {
+  throw new Error("VITE_API_URL is not defined. Please set it in your production environment.");
+}
+
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
     const text = (await res.text()) || res.statusText;
@@ -7,13 +15,14 @@ async function throwIfResNotOk(res: Response) {
   }
 }
 
+
 export async function apiRequest(
   method: string,
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  console.log(`Making API request to: ${url}`);
-  const res = await fetch(url, {
+  const fullUrl = `${API_URL}${url.startsWith("/") ? url : `/${url}`}`;
+  const res = await fetch(fullUrl, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
