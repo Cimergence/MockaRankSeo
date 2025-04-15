@@ -6,6 +6,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Set up authentication routes
   await setupAuth(app);
 
+  // Test route
+  app.get("/test", (req, res) => {
+    res.json({ message: "Test API is working!" });
+  });
+
   // Protected route example
   app.get("/api/dashboard", (req, res) => {
     if (!req.isAuthenticated()) {
