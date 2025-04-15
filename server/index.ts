@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
@@ -35,6 +36,11 @@ app.use((req, res, next) => {
 
   next();
 });
+
+app.use(cors({
+  origin: '*', // Or use '*' for development (not recommended for production)
+  credentials: true // if you’re sending cookies or auth headers
+}));
 
 (async () => {
   const server = await registerRoutes(app);
