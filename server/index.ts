@@ -37,16 +37,19 @@ app.use((req, res, next) => {
   next();
 });
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || ['http://0.0.0.0:5000', 'https://' + process.env.REPL_SLUG + '.' + process.env.REPL_OWNER + '.repl.co'];
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || ['http://0.0.0.0:5000'];
 
 console.log('CORS Configuration:');
-console.log('REPL_SLUG:', process.env.REPL_SLUG);
-console.log('REPL_OWNER:', process.env.REPL_OWNER);
-console.log('Allowed Origins:', allowedOrigins);
+console.log('Incoming requests will be allowed from:');
+console.log('- Development URL (0.0.0.0:5000)');
+console.log('- All Replit domains (*.replit.dev)');
+console.log('- Additional origins:', process.env.ALLOWED_ORIGINS);
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || 
+        allowedOrigins.includes(origin) || 
+        origin.endsWith('.replit.dev')) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
