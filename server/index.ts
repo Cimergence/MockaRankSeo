@@ -37,7 +37,12 @@ app.use((req, res, next) => {
   next();
 });
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:5000'];
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || ['http://0.0.0.0:5000', 'https://' + process.env.REPL_SLUG + '.' + process.env.REPL_OWNER + '.repl.co'];
+
+console.log('CORS Configuration:');
+console.log('REPL_SLUG:', process.env.REPL_SLUG);
+console.log('REPL_OWNER:', process.env.REPL_OWNER);
+console.log('Allowed Origins:', allowedOrigins);
 
 app.use(cors({
   origin: (origin, callback) => {
