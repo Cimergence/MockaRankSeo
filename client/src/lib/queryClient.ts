@@ -1,8 +1,10 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
-const API_URL = import.meta.env.DEV 
-  ? "http://localhost:5000"
-  : import.meta.env.VITE_API_URL as string;
+// const API_URL = import.meta.env.DEV 
+//   ? "http://localhost:5000"
+//   : import.meta.env.VITE_API_URL as string;
+
+const API_URL = import.meta.env.VITE_API_URL as string;
 
 if (!API_URL) {
   throw new Error("VITE_API_URL is not defined. Please set it in your production environment.");
